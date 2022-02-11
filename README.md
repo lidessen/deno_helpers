@@ -34,3 +34,19 @@ setConfig({ ... })
 // Now call it again
 getServiceB().then(console.log)     // Log the result immediately
 ```
+
+## Delayed
+
+It's a bit like AsyncSingleton, but you can update the value with a set method
+
+```ts
+import { delayed } from "https://deno.land/x/deno_helpers/delayed.ts"
+
+const [getConfig, setConfig, getConfigCurrent] = delayed<ConfigType>()
+
+getConfig().then(console.log)   // pending until setConfig is called
+
+setConfig({ ... })
+
+getConfig().then(console.log)   // later calls will return current value immediately
+```
